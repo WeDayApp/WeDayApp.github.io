@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeDay - AI 驱动的伴侣情绪连接器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                        serif: ['Noto Serif SC', 'Songti SC', 'serif'],
+                    },
+                    colors: {
+                        primary: '#EA580C', // Orange 600
+                        secondary: '#E11D48', // Rose 600
+                        accent: '#F59E0B', // Amber 500
+                        surface: '#FAFAF9', // Stone 50
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: #FAFAF9;
+            color: #1C1917;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAFAF9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E7E5E4;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D6D3D1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #EA580C 0%, #E11D48 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .blob-bg {
+            position: absolute;
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .feature-grid-item {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feature-grid-item:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            border-color: rgba(234, 88, 12, 0.2);
+        }
+
+        /* Grainy Texture Overlay */
+        .texture-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.3;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-surface text-stone-800 overflow-x-hidden">
+    <div class="texture-overlay"></div>
+
+    <!-- Abstract Background Shapes -->
+    <div class="blob-bg bg-orange-200 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2 mix-blend-multiply animate-float"></div>
+    <div class="blob-bg bg-rose-200 w-96 h-96 rounded-full top-40 right-0 translate-x-1/3 mix-blend-multiply animate-float" style="animation-delay: 2s;"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/60 backdrop-blur-xl z-50 border-b border-stone-200/50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-rose-500 rounded-lg flex items-center justify-center text-white font-bold shadow-lg shadow-orange-500/20">W</div>
+                    <span class="text-2xl font-bold tracking-tight text-stone-900">WeDay</span>
+                </div>
+                <div class="hidden md:flex space-x-10">
+                    <a href="#features" class="text-sm font-medium text-stone-600 hover:text-orange-600 transition-colors relative group">
+                        功能特性
+                        <span class="absolute inset-x-0 bottom-0 h-0.5 bg-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                    </a>
+                    <a href="#download" class="text-sm font-medium text-stone-600 hover:text-orange-600 transition-colors relative group">
+                        下载应用
+                        <span class="absolute inset-x-0 bottom-0 h-0.5 bg-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                    </a>
+                    <a href="#" class="text-sm font-medium text-stone-600 hover:text-orange-600 transition-colors relative group">
+                        关于我们
+                        <span class="absolute inset-x-0 bottom-0 h-0.5 bg-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#download" class="px-6 py-2.5 text-sm font-medium text-white bg-stone-900 rounded-full hover:bg-stone-800 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                        免费下载
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-40 pb-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="text-left relative z-10">
+                    <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-orange-600 text-xs font-semibold tracking-wide uppercase mb-8 shadow-sm">
+                        <span class="w-2 h-2 bg-orange-500 rounded-full mr-2 animate-pulse"></span>
+                        New Way to Connect
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-stone-900 leading-[1.1]">
+                        不只是懂你，<br />
+                        <span class="font-serif italic gradient-text pr-2">更懂你们</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-stone-500 max-w-xl mb-10 leading-relaxed font-light">
+                        WeDay 将冷冰冰的生理数据翻译成温暖的情绪语言。
+                        无论身在何处，让每一次关心都恰到好处。
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-start gap-4 mb-12">
+                        <a href="#" class="group flex items-center px-8 py-4 bg-stone-900 text-white rounded-2xl hover:bg-stone-800 shadow-xl hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-300">
+                            <svg class="w-7 h-7 mr-3 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.61-.91.61.03 2.34.25 3.44 1.86-.09.06-2.05 1.2-2.03 3.59.02 2.86 2.49 3.83 2.6 3.87-2.83 4.14-2.36 3.61-3.02 4.33zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                            </svg>
+                            <div class="text-left">
+                                <div class="text-xs font-medium text-stone-300">Download on the</div>
+                                <div class="text-xl font-bold leading-none font-sans">App Store</div>
+                            </div>
+                        </a>
+                        <div class="flex items-center h-full px-4 border-l border-stone-200 ml-2">
+                            <div class="text-sm text-stone-400">
+                                <p>Android & PC</p>
+                                <p class="text-xs font-medium text-orange-500">Coming Soon</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Visual -->
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-orange-100/50 to-rose-100/50 rounded-[3rem] transform rotate-3 scale-105 blur-xl"></div>
+                    <div class="glass-card relative rounded-[2.5rem] p-8 border-white/50 shadow-2xl shadow-orange-500/5 aspect-[4/3] flex flex-col items-center justify-center overflow-hidden group">
+                        <!-- Mock UI Elements -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-10 bg-[radial-gradient(circle_at_50%_50%,#EA580C,transparent_70%)]"></div>
+                        
+                        <div class="relative z-10 flex flex-col items-center animate-float">
+                            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-orange-400 to-rose-400 p-1 mb-4 shadow-lg">
+                                <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-3xl">👩</div>
+                            </div>
+                            <div class="w-0.5 h-12 bg-stone-200 relative overflow-hidden">
+                                <div class="absolute top-0 left-0 w-full h-1/2 bg-orange-500 animate-pulse"></div>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-white border-2 border-stone-100 flex items-center justify-center text-xl shadow-sm mt-[-1px] z-20">
+                                ❤️
+                            </div>
+                            <div class="w-0.5 h-12 bg-stone-200 relative overflow-hidden">
+                                <div class="absolute bottom-0 left-0 w-full h-1/2 bg-rose-500 animate-pulse" style="animation-delay: 0.5s"></div>
+                            </div>
+                            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-stone-200 to-stone-300 p-1 mt-[-1px] shadow-lg">
+                                <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-3xl">👨</div>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute bottom-8 left-8 right-8 bg-white/80 backdrop-blur-md rounded-xl p-4 text-sm text-stone-600 shadow-sm transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                            <div class="flex items-center gap-3">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>检测到心率同步，建议发送一个拥抱</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-20">
+                <h2 class="text-3xl md:text-5xl font-bold text-stone-900 mb-6 leading-tight">
+                    AI 驱动的<br />
+                    <span class="font-serif italic text-orange-600">温情时刻</span>
+                </h2>
+                <p class="text-lg text-stone-500 max-w-2xl">不仅仅是记录数据，WeDay 用科技守护你们的关系。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(300px,auto)]">
+                <!-- Feature 1: Large Card -->
+                <div class="md:col-span-2 feature-grid-item glass-card rounded-[2.5rem] p-10 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-orange-100 rounded-full filter blur-3xl opacity-50 transform translate-x-1/3 -translate-y-1/3 group-hover:scale-110 transition-transform duration-700"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 text-2xl border border-orange-100 text-orange-500">
+                            💬
+                        </div>
+                        <h3 class="text-2xl font-bold text-stone-900 mb-4">AI 情绪翻译官</h3>
+                        <p class="text-stone-600 leading-relaxed text-lg max-w-md">
+                            拒绝冷冰冰的生理指标。WeDay 将睡眠、心率等数据智能转化为你能听懂的情绪语言，告诉你 TA 今天是"元气满满"还是"需要抱抱"。
+                        </p>
+                    </div>
+                    <div class="mt-8 relative h-32 w-full bg-white/50 rounded-2xl border border-white/60 overflow-hidden p-4">
+                        <!-- Decorative Graph -->
+                        <div class="flex items-end justify-between h-full gap-2 opacity-60">
+                            <div class="w-full bg-orange-200 rounded-t-md h-[40%]"></div>
+                            <div class="w-full bg-orange-300 rounded-t-md h-[70%]"></div>
+                            <div class="w-full bg-orange-400 rounded-t-md h-[50%]"></div>
+                            <div class="w-full bg-orange-500 rounded-t-md h-[80%]"></div>
+                            <div class="w-full bg-orange-300 rounded-t-md h-[60%]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-grid-item glass-card rounded-[2.5rem] p-10 flex flex-col relative overflow-hidden bg-stone-900 text-white">
+                    <div class="absolute inset-0 bg-gradient-to-br from-stone-800 to-stone-900 z-0"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6 text-2xl backdrop-blur-md border border-white/10">
+                            💓
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">双人同频</h3>
+                        <p class="text-stone-300 leading-relaxed">
+                            异地也能"同框"陪伴。实时感知伴侣的情绪脉搏，感受彼此频率。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-grid-item glass-card rounded-[2.5rem] p-10 flex flex-col relative overflow-hidden">
+                    <div class="w-14 h-14 bg-rose-50 rounded-2xl flex items-center justify-center mb-6 text-2xl border border-rose-100 text-rose-500">
+                        💡
+                    </div>
+                    <h3 class="text-2xl font-bold text-stone-900 mb-4">AI 关心教练</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        不知道如何开口安慰？AI 基于对方当前状态，提供暖心的行动建议。
+                    </p>
+                </div>
+
+                <!-- Feature 4: Large Card -->
+                <div class="md:col-span-2 feature-grid-item glass-card rounded-[2.5rem] p-10 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
+                    <div class="flex-1 relative z-10 order-2 md:order-1">
+                        <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center mb-6 text-2xl border border-yellow-100 text-yellow-500">
+                            🎨
+                        </div>
+                        <h3 class="text-2xl font-bold text-stone-900 mb-4">情绪漫画回忆</h3>
+                        <p class="text-stone-600 leading-relaxed text-lg">
+                            数据生成故事。你们的每一天都会自动生成一张温馨的情绪漫画，串联成独属于你们的关系时间轴，珍藏每一个平凡而闪光的日子。
+                        </p>
+                    </div>
+                    <div class="w-full md:w-1/3 aspect-square bg-yellow-50 rounded-2xl border-4 border-white shadow-lg rotate-3 order-1 md:order-2 flex items-center justify-center">
+                        <span class="text-4xl">🖼️</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section (Designed) -->
+    <section class="py-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="glass-card rounded-3xl p-12 text-center border border-stone-200 shadow-sm">
+                <h2 class="text-2xl font-bold mb-8 text-stone-900">安全与隐私，是爱的底线</h2>
+                <div class="flex flex-wrap justify-center gap-4 md:gap-12">
+                    <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-stone-100 text-stone-600 text-sm font-medium">
+                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        端到端加密
+                    </div>
+                    <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-stone-100 text-stone-600 text-sm font-medium">
+                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        本地优先处理
+                    </div>
+                    <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-stone-100 text-stone-600 text-sm font-medium">
+                        <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        HealthKit 无缝接入
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-stone-900 clip-path-slant"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white">准备好开始这段旅程了吗？</h2>
+            <p class="text-stone-400 text-xl mb-12 font-light">让 WeDay 成为你们关系的温柔粘合剂。</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+                <button class="bg-white text-stone-900 hover:bg-orange-50 px-10 py-5 rounded-full font-bold transition-all transform hover:-translate-y-1 shadow-2xl flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.61-.91.61.03 2.34.25 3.44 1.86-.09.06-2.05 1.2-2.03 3.59.02 2.86 2.49 3.83 2.6 3.87-2.83 4.14-2.36 3.61-3.02 4.33zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    iOS 下载
+                    <span class="ml-2 text-xs bg-stone-200 px-2 py-0.5 rounded text-stone-600">Beta</span>
+                </button>
+            </div>
+            <div class="mt-10 text-sm text-stone-500">
+                * Android 版本正在开发中，敬请关注
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-50 border-t border-stone-200 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start">
+                <div class="mb-8 md:mb-0 max-w-xs">
+                    <span class="text-2xl font-bold text-stone-900 tracking-tight">WeDay</span>
+                    <p class="text-stone-500 mt-4 leading-relaxed">两个人的每一天，都温柔地同框。<br>用数据感知爱，用科技传递情。</p>
+                </div>
+                <div class="grid grid-cols-2 gap-12 sm:gap-24">
+                    <div>
+                        <h4 class="font-bold text-stone-900 mb-4">产品</h4>
+                        <ul class="space-y-3 text-sm text-stone-500">
+                            <li><a href="#" class="hover:text-orange-600 transition-colors">功能介绍</a></li>
+                            <li><a href="#" class="hover:text-orange-600 transition-colors">下载应用</a></li>
+                            <li><a href="#" class="hover:text-orange-600 transition-colors">更新日志</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-stone-900 mb-4">支持</h4>
+                        <ul class="space-y-3 text-sm text-stone-500">
+                            <li><a href="#" class="hover:text-orange-600 transition-colors">使用指南</a></li>
+                            <li><a href="#" class="hover:text-orange-600 transition-colors">隐私政策</a></li>
+                            <li><a href="#" class="hover:text-orange-600 transition-colors">联系我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-16 pt-8 border-t border-stone-200 flex flex-col sm:flex-row justify-between items-center text-sm text-stone-400">
+                <p>&copy; 2025 WeDay Team. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-stone-600">Terms</a>
+                    <a href="#" class="hover:text-stone-600">Privacy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
