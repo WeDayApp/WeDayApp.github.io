@@ -178,36 +178,10 @@
                 </div>
 
                 <!-- Hero Visual -->
-                <div class="relative">
+                <div class="relative w-1/2 mx-auto">
                     <div class="absolute inset-0 bg-gradient-to-tr from-orange-100/50 to-rose-100/50 rounded-[3rem] transform rotate-3 scale-105 blur-xl"></div>
-                    <div class="glass-card relative rounded-[2.5rem] p-8 border-white/50 shadow-2xl shadow-orange-500/5 aspect-[4/3] flex flex-col items-center justify-center overflow-hidden group">
-                        <!-- Mock UI Elements -->
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-10 bg-[radial-gradient(circle_at_50%_50%,#EA580C,transparent_70%)]"></div>
-                        
-                        <div class="relative z-10 flex flex-col items-center animate-float">
-                            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-orange-400 to-rose-400 p-1 mb-4 shadow-lg">
-                                <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-3xl">👩</div>
-                            </div>
-                            <div class="w-0.5 h-12 bg-stone-200 relative overflow-hidden">
-                                <div class="absolute top-0 left-0 w-full h-1/2 bg-orange-500 animate-pulse"></div>
-                            </div>
-                            <div class="w-12 h-12 rounded-full bg-white border-2 border-stone-100 flex items-center justify-center text-xl shadow-sm mt-[-1px] z-20">
-                                ❤️
-                            </div>
-                            <div class="w-0.5 h-12 bg-stone-200 relative overflow-hidden">
-                                <div class="absolute bottom-0 left-0 w-full h-1/2 bg-rose-500 animate-pulse" style="animation-delay: 0.5s"></div>
-                            </div>
-                            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-stone-200 to-stone-300 p-1 mt-[-1px] shadow-lg">
-                                <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-3xl">👨</div>
-                            </div>
-                        </div>
-                        
-                        <div class="absolute bottom-8 left-8 right-8 bg-white/80 backdrop-blur-md rounded-xl p-4 text-sm text-stone-600 shadow-sm transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                            <div class="flex items-center gap-3">
-                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                                <span>检测到心率同步，建议发送一个拥抱</span>
-                            </div>
-                        </div>
+                    <div class="glass-card relative rounded-[2.5rem] p-0 border-white/50 shadow-2xl shadow-orange-500/5 overflow-hidden group">
+                        <img src="assets/calendar.png" alt="Calendar" class="w-full h-auto object-contain">
                     </div>
                 </div>
             </div>
@@ -215,103 +189,191 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-24 relative overflow-hidden">
+    <section id="features" class="py-32 bg-stone-50 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-20">
-                <h2 class="text-3xl md:text-5xl font-bold text-stone-900 mb-6 leading-tight">
+            <div class="text-center max-w-3xl mx-auto mb-24">
+                <h2 class="text-4xl md:text-5xl font-bold text-stone-900 mb-6 leading-tight">
                     AI 驱动的<br />
                     <span class="font-serif italic text-orange-600">温情时刻</span>
                 </h2>
-                <p class="text-lg text-stone-500 max-w-2xl">不仅仅是记录数据，WeDay 用科技守护你们的关系。</p>
+                <p class="text-xl text-stone-500">不仅仅是记录数据，WeDay 用科技守护你们的关系。</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(300px,auto)]">
-                <!-- Feature 1: Large Card -->
-                <div class="md:col-span-2 feature-grid-item glass-card rounded-[2.5rem] p-10 flex flex-col justify-between relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-orange-100 rounded-full filter blur-3xl opacity-50 transform translate-x-1/3 -translate-y-1/3 group-hover:scale-110 transition-transform duration-700"></div>
-                    
-                    <div class="relative z-10">
-                        <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 text-2xl border border-orange-100 text-orange-500">
+            <div class="space-y-32">
+                <!-- Feature 1: AI 情绪翻译官 -->
+                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-24">
+                    <div class="flex-1 order-2 md:order-1">
+                         <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-8 text-3xl text-orange-600">
                             💬
                         </div>
-                        <h3 class="text-2xl font-bold text-stone-900 mb-4">AI 情绪翻译官</h3>
-                        <p class="text-stone-600 leading-relaxed text-lg max-w-md">
+                        <h3 class="text-3xl md:text-4xl font-bold text-stone-900 mb-6">AI 情绪翻译官</h3>
+                        <p class="text-stone-600 leading-relaxed text-lg mb-8">
                             拒绝冷冰冰的生理指标。WeDay 将睡眠、心率等数据智能转化为你能听懂的情绪语言，告诉你 TA 今天是"元气满满"还是"需要抱抱"。
                         </p>
+                        <div class="flex items-center gap-4 text-sm font-medium text-orange-600">
+                            <span class="px-3 py-1 bg-orange-100 rounded-full">情绪识别</span>
+                            <span class="px-3 py-1 bg-orange-100 rounded-full">实时同步</span>
+                        </div>
                     </div>
-                    <div class="mt-8 relative h-32 w-full bg-white/50 rounded-2xl border border-white/60 overflow-hidden p-4">
-                        <!-- Decorative Graph -->
-                        <div class="flex items-end justify-between h-full gap-2 opacity-60">
-                            <div class="w-full bg-orange-200 rounded-t-md h-[40%]"></div>
-                            <div class="w-full bg-orange-300 rounded-t-md h-[70%]"></div>
-                            <div class="w-full bg-orange-400 rounded-t-md h-[50%]"></div>
-                            <div class="w-full bg-orange-500 rounded-t-md h-[80%]"></div>
-                            <div class="w-full bg-orange-300 rounded-t-md h-[60%]"></div>
+                    <div class="flex-1 order-1 md:order-2 relative">
+                        <div class="absolute inset-0 bg-orange-200 rounded-full filter blur-3xl opacity-20 transform translate-x-1/4 translate-y-1/4"></div>
+                        <div class="glass-card rounded-[2rem] p-8 border-white/50 shadow-xl relative z-10 bg-white/60 backdrop-blur-sm">
+                             <!-- Graph -->
+                            <div class="flex items-end justify-between h-48 gap-3 opacity-80">
+                                <div class="w-full bg-orange-200 rounded-t-md h-[40%]"></div>
+                                <div class="w-full bg-orange-300 rounded-t-md h-[70%]"></div>
+                                <div class="w-full bg-orange-400 rounded-t-md h-[50%]"></div>
+                                <div class="w-full bg-orange-500 rounded-t-md h-[80%]"></div>
+                                <div class="w-full bg-orange-300 rounded-t-md h-[60%]"></div>
+                            </div>
+                             <div class="mt-6 flex justify-between text-stone-400 text-sm font-medium">
+                                <span>09:00</span>
+                                <span>12:00</span>
+                                <span>15:00</span>
+                                <span>18:00</span>
+                                <span>21:00</span>
+                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Feature 2 -->
-                <div class="feature-grid-item glass-card rounded-[2.5rem] p-10 flex flex-col relative overflow-hidden bg-stone-900 text-white">
-                    <div class="absolute inset-0 bg-gradient-to-br from-stone-800 to-stone-900 z-0"></div>
-                    <div class="relative z-10">
-                        <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6 text-2xl backdrop-blur-md border border-white/10">
+                <!-- Feature 2: 双人同频 -->
+                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-24">
+                    <div class="flex-1 relative order-1">
+                        <div class="absolute inset-0 bg-stone-800 rounded-full filter blur-3xl opacity-10 transform -translate-x-1/4"></div>
+                         <div class="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-stone-900/5 transform hover:scale-[1.02] transition-transform duration-500 w-1/2 mx-auto">
+                             <img src="assets/mainpage.png" alt="Main Page" class="w-full h-auto object-cover">
+                         </div>
+                    </div>
+                    <div class="flex-1 order-2">
+                        <div class="w-16 h-16 bg-stone-100 rounded-2xl flex items-center justify-center mb-8 text-3xl text-stone-600">
                             💓
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-4">双人同频</h3>
-                        <p class="text-stone-300 leading-relaxed">
+                        <h3 class="text-3xl md:text-4xl font-bold text-stone-900 mb-6">双人同频</h3>
+                        <p class="text-stone-600 leading-relaxed text-lg">
                             异地也能"同框"陪伴。实时感知伴侣的情绪脉搏，感受彼此频率。
+                            <br><br>
+                            当心率趋同，屏幕上的呼吸光效也会同步律动，仿佛对方就在身边，让距离不再是问题。
                         </p>
                     </div>
                 </div>
 
-                <!-- Feature 3 -->
-                <div class="feature-grid-item glass-card rounded-[2.5rem] p-10 flex flex-col relative overflow-hidden">
-                    <div class="w-14 h-14 bg-rose-50 rounded-2xl flex items-center justify-center mb-6 text-2xl border border-rose-100 text-rose-500">
-                        💡
+                <!-- Feature 3: AI 关心教练 -->
+                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-24">
+                    <div class="flex-1 order-2 md:order-1">
+                         <div class="w-16 h-16 bg-rose-100 rounded-2xl flex items-center justify-center mb-8 text-3xl text-rose-600">
+                            💡
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-stone-900 mb-6">AI 关心教练</h3>
+                        <p class="text-stone-600 leading-relaxed text-lg">
+                            不知道如何开口安慰？AI 基于对方当前状态，提供暖心的行动建议。
+                             <br><br>
+                            从"给 TA 点一杯热奶茶"到"发送一个远程拥抱"，让关心不再缺席，让爱意精准传达。
+                        </p>
                     </div>
-                    <h3 class="text-2xl font-bold text-stone-900 mb-4">AI 关心教练</h3>
-                    <p class="text-stone-600 leading-relaxed">
-                        不知道如何开口安慰？AI 基于对方当前状态，提供暖心的行动建议。
-                    </p>
+                    <div class="flex-1 order-1 md:order-2 relative">
+                        <div class="absolute inset-0 bg-rose-200 rounded-full filter blur-3xl opacity-20 transform translate-x-1/4"></div>
+                        <div class="relative z-10 rounded-[2.5rem] overflow-hidden border-4 border-white/20 transform hover:scale-[1.02] transition-transform duration-500 w-1/2 mx-auto">
+                            <img src="assets/statistics.png" alt="Statistics" class="w-full h-auto object-cover">
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Feature 4: Large Card -->
-                <div class="md:col-span-2 feature-grid-item glass-card rounded-[2.5rem] p-10 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
-                    <div class="flex-1 relative z-10 order-2 md:order-1">
-                        <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center mb-6 text-2xl border border-yellow-100 text-yellow-500">
+                <!-- Feature 4: 情绪漫画回忆 -->
+                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-24">
+                    <div class="flex-1 order-1 relative">
+                         <div class="absolute inset-0 bg-yellow-200 rounded-full filter blur-3xl opacity-20 transform -translate-x-1/4"></div>
+                         <div class="relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                            <div class="aspect-square bg-white rounded-3xl shadow-xl p-6 border border-stone-100 flex items-center justify-center">
+                                <div id="comic-trigger" class="w-full h-full bg-yellow-50 rounded-2xl flex items-center justify-center border-2 border-dashed border-yellow-200 group cursor-pointer overflow-hidden transition-all duration-500" onclick="replaceWithComic(this)">
+                                     <div class="text-center transform group-hover:scale-110 transition-transform duration-300">
+                                        <span class="text-8xl block mb-6">🖼️</span>
+                                        <span class="text-stone-500 font-medium">点击生成今日回忆</span>
+                                     </div>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                    <div class="flex-1 order-2">
+                        <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mb-8 text-3xl text-yellow-600">
                             🎨
                         </div>
-                        <h3 class="text-2xl font-bold text-stone-900 mb-4">情绪漫画回忆</h3>
+                        <h3 class="text-3xl md:text-4xl font-bold text-stone-900 mb-6">情绪漫画回忆</h3>
                         <p class="text-stone-600 leading-relaxed text-lg">
-                            数据生成故事。你们的每一天都会自动生成一张温馨的情绪漫画，串联成独属于你们的关系时间轴，珍藏每一个平凡而闪光的日子。
+                            数据生成故事。你们的每一天都会自动生成一张温馨的情绪漫画。
+                            <br><br>
+                            这些漫画串联成独属于你们的关系时间轴，帮你珍藏每一个平凡而闪光的日子，让回忆有迹可循。
                         </p>
-                    </div>
-                    <div class="w-full md:w-1/3 aspect-square bg-yellow-50 rounded-2xl border-4 border-white shadow-lg rotate-3 order-1 md:order-2 flex items-center justify-center">
-                        <span class="text-4xl">🖼️</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Privacy Section (Designed) -->
-    <section class="py-20">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="glass-card rounded-3xl p-12 text-center border border-stone-200 shadow-sm">
-                <h2 class="text-2xl font-bold mb-8 text-stone-900">安全与隐私，是爱的底线</h2>
-                <div class="flex flex-wrap justify-center gap-4 md:gap-12">
-                    <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-stone-100 text-stone-600 text-sm font-medium">
-                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        端到端加密
+    <!-- Privacy Section (Redesigned - Bento Grid) -->
+    <section class="py-32 bg-stone-50 relative">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="mb-16 text-center md:text-left">
+                <h2 class="text-4xl md:text-6xl font-bold text-stone-900 mb-6 tracking-tight">
+                    隐私，<br class="hidden md:block" />
+                    <span class="text-stone-400">是我们对爱的最高承诺。</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(200px,auto)]">
+                <!-- Card 1: End-to-End Encryption (Large) -->
+                <div class="md:col-span-2 md:row-span-2 bg-white rounded-[3rem] p-10 md:p-14 relative overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:shadow-green-500/5 border border-stone-100">
+                    <div class="relative z-10 flex flex-col h-full justify-between">
+                        <div>
+                            <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-8 text-green-600">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            </div>
+                            <h3 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4">端到端加密</h3>
+                            <p class="text-stone-500 text-lg max-w-md leading-relaxed">
+                                你的每一次心跳、每一句晚安，都经过军工级加密。在这个世界上，只有你们两个人拥有解开彼此心事的密钥。
+                            </p>
+                        </div>
+                        <div class="mt-8">
+                            <span class="inline-flex items-center px-4 py-2 rounded-full bg-green-50 text-green-700 text-sm font-medium">
+                                <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                                Security First
+                            </span>
+                        </div>
                     </div>
-                    <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-stone-100 text-stone-600 text-sm font-medium">
-                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        本地优先处理
+                    <!-- Decorative Lock Icon -->
+                    <div class="absolute -bottom-12 -right-12 text-green-50 transform rotate-[-15deg] group-hover:scale-110 group-hover:rotate-[-10deg] transition-transform duration-700">
+                        <svg class="w-96 h-96" fill="currentColor" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     </div>
-                    <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-stone-100 text-stone-600 text-sm font-medium">
-                        <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                        HealthKit 无缝接入
+                </div>
+
+                <!-- Card 2: Local First -->
+                <div class="bg-white rounded-[3rem] p-10 relative overflow-hidden group transition-all duration-500 hover:shadow-xl border border-stone-100">
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center mb-6 text-stone-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-stone-900 mb-2">本地优先</h3>
+                        <p class="text-stone-500">数据只存储在你的手机里，云端只做摆渡人，不做偷窥者。</p>
+                    </div>
+                    <div class="absolute top-1/2 right-0 transform translate-x-1/3 -translate-y-1/2 opacity-5">
+                        <svg class="w-48 h-48" fill="currentColor" viewBox="0 0 24 24"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    </div>
+                </div>
+
+                <!-- Card 3: HealthKit -->
+                <div class="bg-gradient-to-br from-rose-50 to-white rounded-[3rem] p-10 relative overflow-hidden group transition-all duration-500 hover:shadow-xl border border-rose-100">
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center mb-6 text-rose-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-stone-900 mb-2">HealthKit 深度集成</h3>
+                        <p class="text-stone-500">无缝接入 iOS 健康数据，耗电量极低，守护不打扰。</p>
+                    </div>
+                    <!-- Heartbeat animation decoration -->
+                    <div class="absolute bottom-0 left-0 w-full h-12 opacity-20">
+                        <svg class="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
+                            <path d="M0 10 L10 10 L15 0 L20 20 L25 10 L30 10 L40 10 L45 5 L50 15 L55 10 L100 10" fill="none" stroke="currentColor" stroke-width="1" class="text-rose-500"></path>
+                        </svg>
                     </div>
                 </div>
             </div>
@@ -338,7 +400,62 @@
                 * Android 版本正在开发中，敬请关注
             </div>
         </div>
+
+        <!-- Scrolling Brand Banner -->
+        <div class="mt-20 relative z-10 border-t border-white/10 pt-12">
+            <p class="text-center text-stone-500 text-sm mb-8 tracking-wider uppercase font-medium">Supported Platforms & Devices</p>
+            <div class="relative w-full overflow-hidden">
+                <div class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-stone-900 to-transparent z-10"></div>
+                <div class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-stone-900 to-transparent z-10"></div>
+                
+                <div class="flex whitespace-nowrap animate-infinite-scroll hover:pause">
+                    <!-- Logo Set 1 -->
+                    <div class="flex items-center gap-20 mx-12">
+                        <!-- Apple -->
+                        <svg class="h-10 w-auto text-white opacity-60 hover:opacity-100 transition-opacity" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 39.3 8.1 81 28.6 112.6 19.6 30.5 42.6 61.7 73.2 62 26.7.3 38.2-18.2 71.5-18.2 33.2 0 44.1 18.2 71.5 18.2 32.4-.3 51.4-27.4 69.6-57.5 17.3-28.6 27-64.9 27.1-66-1.1-.6-44.6-17.2-46.8-55.9zM251.1 96c15.6-21.7 26.3-50.8 23.6-80.6-25.7 1.2-53.9 15.8-69.7 37.5-13.5 18.5-24.3 49.8-21.5 80.2 27.2 1.8 52.4-13.6 67.6-37.1z"/></svg>
+                        <!-- Google -->
+                        <svg class="h-10 w-auto text-white opacity-60 hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg>
+                        <!-- Huawei -->
+                        <span class="text-white opacity-60 hover:opacity-100 transition-opacity text-3xl font-bold tracking-wider">HUAWEI</span>
+                        <!-- Xiaomi -->
+                        <span class="text-white opacity-60 hover:opacity-100 transition-opacity text-3xl font-bold tracking-wider">Xiaomi</span>
+                        <!-- vivo -->
+                        <span class="text-white opacity-60 hover:opacity-100 transition-opacity text-3xl font-bold tracking-wider">vivo</span>
+                        <!-- OPPO -->
+                        <span class="text-white opacity-60 hover:opacity-100 transition-opacity text-3xl font-bold tracking-wider">OPPO</span>
+                    </div>
+                    <!-- Logo Set 2 (Duplicate for smooth scroll) -->
+                    <div class="flex items-center gap-20 mx-12">
+                        <!-- Apple -->
+                        <svg class="h-10 w-auto text-white opacity-60 hover:opacity-100 transition-opacity" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 39.3 8.1 81 28.6 112.6 19.6 30.5 42.6 61.7 73.2 62 26.7.3 38.2-18.2 71.5-18.2 33.2 0 44.1 18.2 71.5 18.2 32.4-.3 51.4-27.4 69.6-57.5 17.3-28.6 27-64.9 27.1-66-1.1-.6-44.6-17.2-46.8-55.9zM251.1 96c15.6-21.7 26.3-50.8 23.6-80.6-25.7 1.2-53.9 15.8-69.7 37.5-13.5 18.5-24.3 49.8-21.5 80.2 27.2 1.8 52.4-13.6 67.6-37.1z"/></svg>
+                        <!-- Google -->
+                        <svg class="h-10 w-auto text-white opacity-60 hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg>
+                        <!-- Huawei -->
+                        <span class="text-white opacity-60 hover:opacity-100 transition-opacity text-3xl font-bold tracking-wider">HUAWEI</span>
+                        <!-- Xiaomi -->
+                        <span class="text-white opacity-60 hover:opacity-100 transition-opacity text-3xl font-bold tracking-wider">Xiaomi</span>
+                        <!-- vivo -->
+                        <span class="text-white opacity-60 hover:opacity-100 transition-opacity text-3xl font-bold tracking-wider">vivo</span>
+                        <!-- OPPO -->
+                        <span class="text-white opacity-60 hover:opacity-100 transition-opacity text-3xl font-bold tracking-wider">OPPO</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+
+    <style>
+        @keyframes infinite-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .animate-infinite-scroll {
+            animation: infinite-scroll 25s linear infinite;
+        }
+        .hover\:pause:hover {
+            animation-play-state: paused;
+        }
+    </style>
 
     <!-- Footer -->
     <footer class="bg-stone-50 border-t border-stone-200 py-16">
@@ -377,5 +494,12 @@
         </div>
     </footer>
 
+    <script>
+        function replaceWithComic(element) {
+            element.classList.remove('bg-yellow-50', 'border-2', 'border-dashed', 'border-yellow-200', 'group', 'cursor-pointer', 'flex', 'items-center', 'justify-center');
+            element.innerHTML = '<img src="assets/animation.jpg" alt="Daily Comic" class="w-full h-full object-cover animate-fade-in">';
+            element.onclick = null;
+        }
+    </script>
 </body>
 </html>
