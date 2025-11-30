@@ -89,6 +89,45 @@
         }
 
         /* Grainy Texture Overlay */
+        /* QR Code Hover Popup */
+        .qr-trigger {
+            position: relative;
+        }
+        .qr-popup {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            pointer-events: none;
+            overflow: visible;
+            padding-top: 20px;
+        }
+        .qr-trigger:hover .qr-popup {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(8px);
+        }
+        .qr-popup img {
+            transform: scale(3);
+            transform-origin: top center;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border: 2px solid white;
+        }
+        .qr-popup::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-bottom-color: white;
+        }
+
         .texture-overlay {
             position: fixed;
             top: 0;
@@ -132,9 +171,12 @@
                     </a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a href="https://sg9gf9ts-2n5s4xaace-d4lbcng207o850obm4v0.pre-mobile.cozeapp.net/p-home" class="px-6 py-2.5 text-sm font-medium text-white bg-stone-900 rounded-full hover:bg-stone-800 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                    <div class="qr-trigger px-6 py-2.5 text-sm font-medium text-white bg-stone-900 rounded-full hover:bg-stone-800 hover:shadow-xl transition-all duration-300 cursor-pointer">
                         尝试 Demo
-                    </a>
+                        <div class="qr-popup">
+                            <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-30-14-31-35.png" alt="扫码体验">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -159,13 +201,16 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row items-start gap-4 mb-12">
-                        <a href="https://sg9gf9ts-2n5s4xaace-d4lbcng207o850obm4v0.pre-mobile.cozeapp.net/p-home" class="group flex items-center px-8 py-4 bg-stone-900 text-white rounded-2xl hover:bg-stone-800 shadow-xl hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-300">
+                        <div class="qr-trigger group flex items-center px-8 py-4 bg-stone-900 text-white rounded-2xl hover:bg-stone-800 shadow-xl hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-300 cursor-pointer">
                             <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-29-18-09-11.png" alt="Coze" class="w-7 h-7 mr-3 group-hover:scale-110 transition-transform">
                             <div class="text-left">
                                 <div class="text-xs font-medium text-stone-300">Try demo on the</div>
                                 <div class="text-xl font-bold leading-none font-sans">coze</div>
                             </div>
-                        </a>
+                            <div class="qr-popup">
+                                <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-30-14-31-35.png" alt="扫码体验">
+                            </div>
+                        </div>
                         <div class="flex items-center h-full px-4 border-l border-stone-200 ml-2">
                             <div class="text-sm text-stone-400">
                                 <p>Android & IOS</p>
@@ -379,18 +424,21 @@
     </section>
 
     <!-- Download Section -->
-    <section id="download" class="py-32 relative overflow-hidden">
+    <section id="download" class="py-32 relative">
         <div class="absolute inset-0 bg-stone-900 clip-path-slant"></div>
         <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
             <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white">准备好开始这段旅程了吗？</h2>
             <p class="text-stone-400 text-xl mb-12 font-light">让 WeDay 成为你们关系的温柔粘合剂。</p>
             
             <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                <a href="https://sg9gf9ts-2n5s4xaace-d4lbcng207o850obm4v0.pre-mobile.cozeapp.net/p-home" class="bg-white text-stone-900 hover:bg-orange-50 px-10 py-5 rounded-full font-bold transition-all transform hover:-translate-y-1 shadow-2xl flex items-center">
+                <div class="qr-trigger bg-white text-stone-900 hover:bg-orange-50 px-10 py-5 rounded-full font-bold transition-all transform hover:-translate-y-1 shadow-2xl flex items-center cursor-pointer">
                     <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-29-18-08-49.png" alt="Coze" class="w-6 h-6 mr-2">
                     尝试 Demo
                     <span class="ml-2 text-xs bg-stone-200 px-2 py-0.5 rounded text-stone-600">Beta</span>
-                </a>
+                    <div class="qr-popup">
+                        <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-30-14-31-35.png" alt="扫码体验">
+                    </div>
+                </div>
             </div>
             <div class="mt-10 text-sm text-stone-500">
                 * IOS 以及 Android 版本正在开发中，敬请关注
