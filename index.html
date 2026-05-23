@@ -5,94 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeDay - AI 驱动的伴侣情绪连接器</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
-                        serif: ['Noto Serif SC', 'Songti SC', 'serif'],
-                    },
-                    colors: {
-                        primary: '#EA580C', // Orange 600
-                        secondary: '#E11D48', // Rose 600
-                        accent: '#F59E0B', // Amber 500
-                        surface: '#FAFAF9', // Stone 50
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
+                        hand: ['Caveat', 'cursive'],
                     }
                 }
             }
         }
     </script>
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
             -webkit-font-smoothing: antialiased;
-            background-color: #FAFAF9;
-            color: #1C1917;
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #FAFAF9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #E7E5E4;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #D6D3D1;
+            background-color: #FFFFFF;
+            color: #111111;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #EA580C 0%, #E11D48 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        .snap-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
 
-        .blob-bg {
-            position: absolute;
-            filter: blur(60px);
-            z-index: -1;
-            opacity: 0.6;
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #FFFFFF; }
+        ::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D1D5DB; }
+
+        .phone-mockup {
+            border-radius: 2.5rem;
+            overflow: hidden;
+            box-shadow:
+                0 0 0 1px rgba(0,0,0,0.05),
+                0 25px 50px -12px rgba(0,0,0,0.18),
+                0 50px 80px -20px rgba(0,0,0,0.12);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .phone-mockup:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow:
+                0 0 0 1px rgba(0,0,0,0.05),
+                0 35px 60px -15px rgba(0,0,0,0.25),
+                0 60px 100px -25px rgba(0,0,0,0.18);
+        }
+        .phone-mockup img {
+            width: 100%;
+            display: block;
         }
 
-        .feature-grid-item {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .feature-grid-item:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-            border-color: rgba(234, 88, 12, 0.2);
+        .mockup-lg  { width: min(560px, 48vw); max-width: 620px; }
+        .mockup-md  { width: min(540px, 48vw); max-width: 600px; }
+        .mockup-sm  { width: min(340px, 32vw); max-width: 380px; }
+        @media (max-width: 1023px) {
+            .mockup-lg { width: min(380px, 90vw); }
+            .mockup-md { width: min(360px, 88vw); }
+            .mockup-sm { width: min(280px, 75vw); }
         }
 
-        /* Grainy Texture Overlay */
-        /* QR Code Hover Popup */
-        .qr-trigger {
-            position: relative;
-        }
+        .qr-trigger { position: relative; cursor: pointer; }
         .qr-popup {
             position: absolute;
             top: 100%;
@@ -103,8 +82,7 @@
             transition: all 0.3s ease;
             z-index: 100;
             pointer-events: none;
-            overflow: visible;
-            padding-top: 20px;
+            padding-top: 16px;
         }
         .qr-trigger:hover .qr-popup {
             opacity: 1;
@@ -112,69 +90,130 @@
             transform: translateX(-50%) translateY(8px);
         }
         .qr-popup img {
-            transform: scale(3);
-            transform-origin: top center;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            border: 2px solid white;
-        }
-        .qr-popup::after {
-            content: '';
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 8px solid transparent;
-            border-bottom-color: white;
+            width: 180px;
+            height: 180px;
+            border-radius: 16px;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+            background: white;
+            padding: 10px;
         }
 
-        .texture-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        .blob-wrap {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .blob-single {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            animation: blob-expand 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+                       blob-float 12s ease-in-out infinite;
+            animation-delay: 0s, 1.2s;
+        }
+        .blob-single svg { width: 200%; height: 200%; }
+
+        @keyframes blob-expand {
+            0% { transform: scale(0.15); opacity: 0; }
+            60% { opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes blob-float {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(20px, -30px) scale(1.08) rotate(3deg); }
+            66% { transform: translate(-15px, 20px) scale(0.95) rotate(-2deg); }
+        }
+
+        /* Comic Carousel */
+        .comic-carousel-outer {
+            width: 100vw;
+            height: 640px;
+            position: relative;
+            overflow: hidden;
+            cursor: grab;
+            touch-action: none;
+            margin-left: calc(-50vw + 50%);
+            background: #FFFFFF;
+        }
+        .comic-carousel-outer:active { cursor: grabbing; }
+        .comic-carousel {
+            position: absolute;
+            display: flex;
+            align-items: center;
             height: 100%;
+            will-change: transform;
+            gap: 28px;
+            padding: 0 50vw;
+        }
+        .comic-item {
+            position: relative;
+            flex-shrink: 0;
+            will-change: transform, opacity;
+        }
+        .comic-item img {
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+            display: block;
+            user-select: none;
             pointer-events: none;
-            z-index: 9999;
-            opacity: 0.3;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+            -webkit-user-drag: none;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .carousel-btn:hover {
+            background: #fff;
+            transform: translateY(-50%) scale(1.1);
+        }
+        .carousel-btn-left { left: 20px; }
+        .carousel-btn-right { right: 20px; }
+        @media (max-width: 1023px) {
+            .carousel-btn { display: none; }
         }
     </style>
 </head>
-<body class="bg-surface text-stone-800 overflow-x-hidden">
-    <div class="texture-overlay"></div>
+<body class="bg-white text-gray-900 overflow-x-hidden">
 
-    <!-- Abstract Background Shapes -->
-    <div class="blob-bg bg-orange-200 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2 mix-blend-multiply animate-float"></div>
-    <div class="blob-bg bg-rose-200 w-96 h-96 rounded-full top-40 right-0 translate-x-1/3 mix-blend-multiply animate-float" style="animation-delay: 2s;"></div>
-    
     <!-- Navigation -->
-    <nav class="fixed w-full bg-white/60 backdrop-blur-xl z-50 border-b border-stone-200/50 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav id="navbar" class="fixed w-full bg-white/90 backdrop-blur-md z-50 transition-shadow duration-300 border-b border-gray-100/50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex items-center gap-2">
-                    <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-29-17-45-41.png" alt="WeDay" class="w-8 h-8 rounded-lg">
-                    <span class="text-2xl font-bold tracking-tight text-stone-900">WeDay</span>
+                <div class="flex items-center gap-2.5">
+                    <img src="assets/wedayicon.png" alt="WeDay" class="w-9 h-9 rounded-xl">
+                    <span class="text-2xl font-bold tracking-tight text-black">WeDay</span>
                 </div>
                 <div class="hidden md:flex space-x-10">
-                    <a href="#features" class="text-sm font-medium text-stone-600 hover:text-orange-600 transition-colors relative group">
-                        功能特性
-                        <span class="absolute inset-x-0 bottom-0 h-0.5 bg-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-                    </a>
-                    <a href="#download" class="text-sm font-medium text-stone-600 hover:text-orange-600 transition-colors relative group">
-                        下载应用
-                        <span class="absolute inset-x-0 bottom-0 h-0.5 bg-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-                    </a>
-                    <a href="#" class="text-sm font-medium text-stone-600 hover:text-orange-600 transition-colors relative group">
-                        关于我们
-                        <span class="absolute inset-x-0 bottom-0 h-0.5 bg-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-                    </a>
+                    <a href="#features" class="text-sm font-medium text-gray-500 hover:text-black transition-colors">功能特性</a>
+                    <a href="#download" class="text-sm font-medium text-gray-500 hover:text-black transition-colors">下载应用</a>
+                    <a href="#" class="text-sm font-medium text-gray-500 hover:text-black transition-colors">关于我们</a>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <div class="qr-trigger px-6 py-2.5 text-sm font-medium text-white bg-stone-900 rounded-full hover:bg-stone-800 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div class="flex items-center">
+                    <div class="qr-trigger px-5 py-2.5 text-sm font-semibold text-white bg-orange-500 rounded-full hover:bg-orange-600 transition-colors duration-200">
                         尝试 Demo
                         <div class="qr-popup">
-                            <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-30-14-31-35.png" alt="扫码体验">
+                            <img src="assets/scan.png" alt="扫码体验">
                         </div>
                     </div>
                 </div>
@@ -183,48 +222,48 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-40 pb-24 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="text-left relative z-10">
-                    <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-orange-600 text-xs font-semibold tracking-wide uppercase mb-8 shadow-sm">
-                        <span class="w-2 h-2 bg-orange-500 rounded-full mr-2 animate-pulse"></span>
-                        New Way to Connect
-                    </div>
-                    <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-stone-900 leading-[1.1]">
-                        不只是懂你，<br />
-                        <span class="font-serif italic gradient-text pr-2">更懂你们</span>
+    <section class="snap-section">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div class="text-left">
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-black leading-[1.05] tracking-tight">
+                        不只是懂你，<br />更懂你们
                     </h1>
-                    <p class="text-lg md:text-xl text-stone-500 max-w-xl mb-10 leading-relaxed font-light">
-                        WeDay 将冷冰冰的生理数据翻译成温暖的情绪语言。
-                        无论身在何处，让每一次关心都恰到好处。
+                    <p class="text-lg md:text-xl text-gray-500 max-w-lg mt-8 leading-relaxed">
+                        WeDay 将冷冰冰的生理数据翻译成温暖的情绪语言。无论身在何处，让每一次关心都恰到好处。
                     </p>
-                    
-                    <div class="flex flex-col sm:flex-row items-start gap-4 mb-12">
-                        <div class="qr-trigger group flex items-center px-8 py-4 bg-stone-900 text-white rounded-2xl hover:bg-stone-800 shadow-xl hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-300 cursor-pointer">
-                            <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-29-18-09-11.png" alt="Coze" class="w-7 h-7 mr-3 group-hover:scale-110 transition-transform">
+
+                    <div class="flex flex-col sm:flex-row items-start gap-5 mt-12">
+                        <div class="qr-trigger group flex items-center px-8 py-4 bg-orange-500 text-white rounded-full font-bold text-lg hover:bg-orange-600 transition-all duration-200 cursor-pointer shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/30">
+                            <img src="assets/coze_black.png" alt="Coze" class="w-7 h-7 mr-3 invert group-hover:scale-110 transition-transform">
                             <div class="text-left">
-                                <div class="text-xs font-medium text-stone-300">Try demo on the</div>
+                                <div class="text-xs font-medium text-white/80">Try demo on the</div>
                                 <div class="text-xl font-bold leading-none font-sans">coze</div>
                             </div>
+                            <span class="ml-3 text-xl group-hover:translate-x-1.5 transition-transform duration-200">&rarr;</span>
                             <div class="qr-popup">
-                                <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-30-14-31-35.png" alt="扫码体验">
+                                <img src="assets/scan.png" alt="扫码体验">
                             </div>
                         </div>
-                        <div class="flex items-center h-full px-4 border-l border-stone-200 ml-2">
-                            <div class="text-sm text-stone-400">
-                                <p>Android & IOS</p>
+                        <div class="flex items-center h-full px-2 sm:px-4 sm:border-l sm:border-gray-200 sm:ml-2">
+                            <div class="text-sm text-gray-400">
+                                <p>Android & iOS</p>
                                 <p class="text-xs font-medium text-orange-500">Coming Soon</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Hero Visual -->
-                <div class="relative w-1/2 mx-auto">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-orange-100/50 to-rose-100/50 rounded-[3rem] transform rotate-3 scale-105 blur-xl"></div>
-                    <div class="glass-card relative rounded-[2.5rem] p-0 border-white/50 shadow-2xl shadow-orange-500/5 overflow-hidden group">
-                        <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-29-17-30-54.png" alt="Calendar" class="w-full h-auto object-contain">
+                <div class="relative flex justify-center items-center">
+                    <div class="absolute -inset-12 md:-inset-20 lg:-inset-24 pointer-events-none blob-wrap">
+                        <div class="blob-single">
+                            <svg class="w-full h-full text-orange-300/80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="currentColor" d="M47.5,-57.2C59.9,-47.1,67.3,-31.6,69.4,-15.8C71.5,0,68.3,16.1,60.1,29.6C51.9,43.1,38.7,54,24.1,59.6C9.5,65.2,-6.5,65.5,-20.3,60.8C-34.4,56.1,-47.6,41.5,-55.8,29.1C-64,16.7,-67.2,1,-63.6,-12.3C-60,-26.6,-49.6,-38.5,-37.6,-48.2C-25.6,-57.9,-12,-65.4,1.3,-66.9C14.6,-68.4,29.2,-64,39.9,-48.1Z" transform="translate(100 100)" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="phone-mockup mockup-lg relative z-10">
+                        <img src="assets/首页和安抚建议.png" alt="WeDay App">
                     </div>
                 </div>
             </div>
@@ -232,292 +271,374 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-32 bg-stone-50 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-24">
-                <h2 class="text-4xl md:text-5xl font-bold text-stone-900 mb-6 leading-tight">
-                    AI 驱动的<br />
-                    <span class="font-serif text-orange-600">「温情时刻」</span>
-                </h2>
-                <p class="text-xl text-stone-500">生活再忙，也不想错过对方的情绪变化。</p>
-                <p class="text-xl text-stone-500">WeDay 用数据和分析，让你第一时间知道 TA 的真实情况。</p>
-            </div>
+    <section id="features">
 
-            <div class="space-y-32">
-                <!-- Feature 1: AI 情绪翻译官 -->
-                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-24">
-                    <div class="flex-1 order-2 md:order-1">
-                         <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-8 text-3xl text-orange-600">
-                            💬
-                        </div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4">AI 情绪翻译官</h3>
-                        <p class="text-xl text-stone-700 mb-6">看不见的情绪，也能被发现</p>
-                        <p class="text-stone-600 leading-relaxed text-lg mb-4">
-                            WeDay 根据睡眠、压力、HRV 等数据，<br>告诉你对方今天的状态是否有波动。
+        <!-- Feature 1: AI 情绪翻译官 -->
+        <div class="snap-section">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                    <div class="order-2 lg:order-1">
+                        <h3 class="text-4xl md:text-5xl font-bold text-black mb-5 leading-tight">AI 情绪翻译官</h3>
+                        <p class="text-xl md:text-2xl text-gray-500 mb-8">看不见的情绪，也能被发现</p>
+                        <p class="text-gray-600 leading-relaxed text-lg mb-6 max-w-lg">
+                            WeDay 根据睡眠、压力、HRV 等数据，告诉你对方今天的状态是否有波动。
                         </p>
-                        <blockquote class="border-l-4 border-orange-400 pl-4 text-stone-600 italic mb-4">
-                            "TA 今天可能有点累，你可以多关心一下。"
-                        </blockquote>
-                        <p class="text-stone-600 leading-relaxed text-lg mb-8">无需猜测，也不再误会。</p>
-                        <div class="flex items-center gap-4 text-sm font-medium text-orange-600">
-                            <span class="px-3 py-1 bg-orange-100 rounded-full">状态波动提醒</span>
-                            <span class="px-3 py-1 bg-orange-100 rounded-full">生理数据分析</span>
+                        <p class="text-gray-600 italic mb-8 text-lg">"TA 今天可能有点累，你可以多关心一下。"</p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">状态波动提醒</span>
+                            <span class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">生理数据分析</span>
                         </div>
                     </div>
-                    <div class="flex-1 order-1 md:order-2 relative">
-                        <div class="absolute inset-0 bg-orange-200 rounded-full filter blur-3xl opacity-20 transform translate-x-1/4 translate-y-1/4"></div>
-                        <div class="glass-card rounded-[2rem] p-8 border-white/50 shadow-xl relative z-10 bg-white/60 backdrop-blur-sm">
-                             <!-- Graph -->
-                            <div class="flex items-end justify-between h-48 gap-3 opacity-80">
-                                <div class="w-full bg-orange-200 rounded-t-md h-[40%]"></div>
-                                <div class="w-full bg-orange-300 rounded-t-md h-[70%]"></div>
-                                <div class="w-full bg-orange-400 rounded-t-md h-[50%]"></div>
-                                <div class="w-full bg-orange-500 rounded-t-md h-[80%]"></div>
-                                <div class="w-full bg-orange-300 rounded-t-md h-[60%]"></div>
+                    <div class="relative flex justify-center items-center order-1 lg:order-2">
+                        <div class="absolute -inset-12 md:-inset-20 lg:-inset-24 pointer-events-none blob-wrap">
+                            <div class="blob-single">
+                                <svg class="w-full h-full text-rose-300/80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="currentColor" d="M39.9,-48.1C52.4,-38.6,63.6,-27.1,66.7,-13.8C69.8,-0.5,64.8,14.6,56.3,27.3C47.8,40,35.8,50.3,22.3,55.3C8.8,60.3,-6.2,60,-20.3,55.3C-34.4,50.6,-47.6,41.5,-55.8,29.1C-64,16.7,-67.2,1,-63.6,-12.3C-60,-26.6,-49.6,-38.5,-37.6,-48.2C-25.6,-57.9,-12,-65.4,1.3,-66.9C14.6,-68.4,29.2,-64,39.9,-48.1Z" transform="translate(100 100)" />
+                                </svg>
                             </div>
-                             <div class="mt-6 flex justify-between text-stone-400 text-sm font-medium">
-                                <span>09:00</span>
-                                <span>12:00</span>
-                                <span>15:00</span>
-                                <span>18:00</span>
-                                <span>21:00</span>
-                             </div>
+                        </div>
+                        <div class="phone-mockup relative z-10" style="width: min(420px, 40vw); max-width: 480px;">
+                            <img src="assets/健康详情页.png" alt="健康详情">
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Feature 2: 双人同频 -->
-                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-24">
-                    <div class="flex-1 relative order-1">
-                        <div class="absolute inset-0 bg-stone-800 rounded-full filter blur-3xl opacity-10 transform -translate-x-1/4"></div>
-                         <div class="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-stone-900/5 transform hover:scale-[1.02] transition-transform duration-500 w-1/2 mx-auto">
-                             <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-29-17-34-01.png" alt="Main Page" class="w-full h-auto object-cover">
-                         </div>
-                    </div>
-                    <div class="flex-1 order-2">
-                        <div class="w-16 h-16 bg-stone-100 rounded-2xl flex items-center justify-center mb-8 text-3xl text-stone-600">
-                            💓
+        <!-- Feature 2: 双人同频 -->
+        <div class="snap-section">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                    <div class="relative flex justify-center items-center">
+                        <div class="absolute -inset-12 md:-inset-20 lg:-inset-24 pointer-events-none blob-wrap">
+                            <div class="blob-single">
+                                <svg class="w-full h-full text-amber-300/80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="currentColor" d="M42.8,-73.2C55.4,-65.8,66.1,-54.6,74.1,-42.1C82.1,-29.6,87.4,-15.8,85.8,-2.3C84.2,11.2,75.7,24.4,65.6,35.6C55.5,46.8,43.8,56,31.2,62.8C18.6,69.6,5.1,74,-8.3,73.8C-21.7,73.6,-35,68.8,-47.1,61.2C-59.2,53.6,-70.1,43.2,-77.3,30.8C-84.5,18.4,-88,3.9,-85.4,-9.5C-82.8,-22.9,-74.1,-35.2,-63.4,-44.8C-52.7,-54.4,-40,-61.3,-27.1,-68.5C-14.2,-75.7,-0.7,-83.2,12.3,-82.5C25.3,-81.8,38.8,-73,42.8,-73.2Z" transform="translate(100 100)" />
+                                </svg>
+                            </div>
                         </div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4">双人同频</h3>
-                        <p class="text-stone-500 text-lg mb-4">再忙碌的日子，也能对齐节奏</p>
-                        <p class="text-stone-600 leading-relaxed text-lg mb-6">
-                            TA 今天是否睡得好、压力如何、精神是否紧绷。
-                            <br>
-                            无需追问，就能及时捕捉 TA 的情绪波动。
+                        <div class="phone-mockup mockup-md relative z-10">
+                            <img src="assets/首页和安抚建议.png" alt="首页和安抚建议">
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl md:text-5xl font-bold text-black mb-5 leading-tight">双人同频</h3>
+                        <p class="text-xl md:text-2xl text-gray-500 mb-8">再忙碌的日子，也能对齐节奏</p>
+                        <p class="text-gray-600 leading-relaxed text-lg mb-8 max-w-lg">
+                            TA 今天是否睡得好、压力如何、精神是否紧绷。无需追问，就能及时捕捉 TA 的情绪波动。
                         </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-sm">实时状态共享</span>
-                            <span class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-sm">智能数据分析</span>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">实时状态共享</span>
+                            <span class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">智能数据分析</span>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Feature 3: AI 关心教练 -->
-                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-24">
-                    <div class="flex-1 order-2 md:order-1">
-                         <div class="w-16 h-16 bg-rose-100 rounded-2xl flex items-center justify-center mb-8 text-3xl text-rose-600">
-                            💡
-                        </div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4">AI 关心教练</h3>
-                        <p class="text-stone-500 text-lg mb-4">不会表达？WeDay 教你更温柔地爱</p>
-                        <p class="text-stone-600 leading-relaxed text-lg mb-6">
+        <!-- Feature 3: AI 关心教练 -->
+        <div class="snap-section">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                    <div class="order-2 lg:order-1">
+                        <h3 class="text-4xl md:text-5xl font-bold text-black mb-5 leading-tight">AI 关心教练</h3>
+                        <p class="text-xl md:text-2xl text-gray-500 mb-8">不会表达？WeDay 教你更温柔地爱</p>
+                        <p class="text-gray-600 leading-relaxed text-lg mb-8 max-w-lg">
                             从"给 TA 点一杯热奶茶"到"发送一个远程拥抱"，让关心不再缺席，让爱意精准传达。
                         </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-rose-100 text-rose-600 rounded-full text-sm">智能表达</span>
-                            <span class="px-3 py-1 bg-rose-100 text-rose-600 rounded-full text-sm">行动建议</span>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">智能表达</span>
+                            <span class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">行动建议</span>
                         </div>
                     </div>
-                    <div class="flex-1 order-1 md:order-2 relative">
-                        <div class="absolute inset-0 bg-rose-200 rounded-full filter blur-3xl opacity-20 transform translate-x-1/4"></div>
-                        <div class="relative z-10 rounded-[2.5rem] overflow-hidden border-4 border-white/20 transform hover:scale-[1.02] transition-transform duration-500 w-1/2 mx-auto">
-                            <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-29-17-34-28.png" alt="Statistics" class="w-full h-auto object-cover">
+                    <div class="relative flex justify-center items-center order-1 lg:order-2">
+                        <div class="absolute -inset-12 md:-inset-20 lg:-inset-24 pointer-events-none blob-wrap">
+                            <div class="blob-single">
+                                <svg class="w-full h-full text-orange-300/80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="currentColor" d="M38.5,-63.4C50.1,-56.8,60,-46.7,68.1,-35.2C76.2,-23.7,82.5,-10.8,81.2,1.3C79.9,13.4,71,24.8,61.5,34.6C52,44.4,41.9,52.6,30.6,58.8C19.3,65,6.8,69.2,-5.7,70.6C-18.2,72,-30.7,70.6,-42.3,65.1C-53.9,59.6,-64.6,50,-72.4,38.3C-80.2,26.6,-85.1,12.8,-83.4,-0.3C-81.7,-13.4,-73.4,-25.8,-63.8,-36.1C-54.2,-46.4,-43.3,-54.6,-31.6,-61.1C-19.9,-67.6,-7.4,-72.4,4.8,-73.8C17,-75.2,29.5,-73.2,38.5,-63.4Z" transform="translate(100 100)" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="phone-mockup mockup-md relative z-10">
+                            <img src="assets/注册引导页.png" alt="注册引导">
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Feature 4: 情绪漫画回忆 -->
-                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-24">
-                    <div class="flex-1 order-1 relative">
-                         <div class="absolute inset-0 bg-yellow-200 rounded-full filter blur-3xl opacity-20 transform -translate-x-1/4"></div>
-                         <div class="relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500">
-                            <div class="aspect-square bg-white rounded-3xl shadow-xl p-6 border border-stone-100 flex items-center justify-center">
-                                <div id="comic-trigger" class="w-full h-full bg-yellow-50 rounded-2xl flex items-center justify-center border-2 border-dashed border-yellow-200 group cursor-pointer overflow-hidden transition-all duration-500" onclick="replaceWithComic(this)">
-                                     <div class="text-center transform group-hover:scale-110 transition-transform duration-300">
-                                        <span class="text-8xl block mb-6">🖼️</span>
-                                        <span class="text-stone-500 font-medium">点击生成今日回忆</span>
-                                     </div>
-                                </div>
+        <!-- Feature 4: 情绪漫画回忆 -->
+        <div class="snap-section">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                    <div class="relative flex justify-center items-center">
+                        <div class="absolute -inset-12 md:-inset-20 lg:-inset-24 pointer-events-none blob-wrap">
+                            <div class="blob-single">
+                                <svg class="w-full h-full text-rose-300/80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="currentColor" d="M44.7,-76.4C58.9,-69.2,71.8,-59.1,79.6,-46.9C87.4,-34.7,90.1,-20.4,85.8,-7.1C81.5,6.2,70.2,18.5,59.6,29.6C49,40.7,39.1,50.6,27.9,56.9C16.7,63.2,4.2,65.9,-7.3,64.3C-18.8,62.7,-29.3,56.8,-39.6,49.6C-49.9,42.4,-60,33.9,-67.1,23.2C-74.2,12.5,-78.3,-0.4,-75.8,-12.4C-73.3,-24.4,-64.2,-35.5,-53.3,-44.1C-42.4,-52.7,-29.7,-58.8,-16.8,-66.7C-3.9,-74.6,9.2,-84.3,23.3,-85.8C37.4,-87.3,52.5,-80.6,44.7,-76.4Z" transform="translate(100 100)" />
+                                </svg>
                             </div>
-                         </div>
-                    </div>
-                    <div class="flex-1 order-2">
-                        <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mb-8 text-3xl text-yellow-600">
-                            🎨
                         </div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4">情绪漫画回忆</h3>
-                        <p class="text-stone-500 text-lg mb-4">度过的每一天，都值得被记住</p>
-                        <p class="text-stone-600 leading-relaxed text-lg mb-6">
-                            WeDay 会每天自动生成一张专属的 AI 双人漫画。
-                            <br>
-                            即使异地，也一起走完了这一天。爱不仅是当下的陪伴，也是被珍藏的记忆。
+                        <div class="phone-mockup mockup-sm relative z-10">
+                            <img src="assets/漫画日记页面.jpg" alt="漫画日记">
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl md:text-5xl font-bold text-black mb-5 leading-tight">情绪漫画回忆</h3>
+                        <p class="text-xl md:text-2xl text-gray-500 mb-8">度过的每一天，都值得被记住</p>
+                        <p class="text-gray-600 leading-relaxed text-lg mb-8 max-w-lg">
+                            WeDay 会每天自动生成一张专属的 AI 双人漫画。即使异地，也一起走完了这一天。爱不仅是当下的陪伴，也是被珍藏的记忆。
                         </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm">每日漫画</span>
-                            <span class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm">自动记录</span>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">每日漫画</span>
+                            <span class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">自动记录</span>
                         </div>
                     </div>
+                </div>
+
+                <!-- Comic Carousel -->
+                <div class="comic-carousel-outer" id="comicCarouselOuter">
+                    <button class="carousel-btn carousel-btn-left" id="carouselBtnLeft" aria-label="向左滚动">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button class="carousel-btn carousel-btn-right" id="carouselBtnRight" aria-label="向右滚动">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                    <div class="comic-carousel" id="comicCarousel"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Privacy Section (Redesigned - Bento Grid) -->
-    <section class="py-32 bg-stone-50 relative">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="mb-16 text-center md:text-left">
-                <h2 class="text-4xl md:text-6xl font-bold text-stone-900 mb-6 tracking-tight">
-                    隐私，<br class="hidden md:block" />
-                    <span class="text-stone-400">是我们对爱的最高承诺。</span>
-                </h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(200px,auto)]">
-                <!-- Card 1: End-to-End Encryption (Large) -->
-                <div class="md:col-span-2 md:row-span-2 bg-white rounded-[3rem] p-10 md:p-14 relative overflow-hidden group transition-all duration-500 hover:shadow-2xl hover:shadow-green-500/5 border border-stone-100">
-                    <div class="relative z-10 flex flex-col h-full justify-between">
-                        <div>
-                            <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-8 text-green-600">
-                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                            </div>
-                            <h3 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4">端到端加密</h3>
-                            <p class="text-stone-500 text-lg max-w-md leading-relaxed">
-                                你的每一次心跳、每一句晚安，都经过加密。在这个世界上，只有你们两个人拥有解开彼此心事的密钥。
-                            </p>
-                        </div>
-                        <div class="mt-8">
-                            <span class="inline-flex items-center px-4 py-2 rounded-full bg-green-50 text-green-700 text-sm font-medium">
-                                <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-                                Security First
-                            </span>
-                        </div>
+    <!-- Privacy Section -->
+    <section class="snap-section">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8 w-full">
+            <h2 class="text-4xl md:text-5xl font-bold text-black text-center mb-20">隐私，是我们对爱的最高承诺</h2>
+            <div class="grid md:grid-cols-3 gap-16">
+                <div class="text-center">
+                    <div class="w-12 h-12 mx-auto text-gray-400 mb-5">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     </div>
-                    <!-- Decorative Lock Icon -->
-                    <div class="absolute -bottom-12 -right-12 text-green-50 transform rotate-[-15deg] group-hover:scale-110 group-hover:rotate-[-10deg] transition-transform duration-700">
-                        <svg class="w-96 h-96" fill="currentColor" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                    </div>
+                    <h3 class="text-xl font-semibold text-black mb-3">端到端加密</h3>
+                    <p class="text-gray-500 leading-relaxed">你的每一次心跳、每一句晚安，都经过加密。在这个世界上，只有你们两个人拥有解开彼此心事的密钥。</p>
                 </div>
-
-                <!-- Card 2: Local First -->
-                <div class="bg-white rounded-[3rem] p-10 relative overflow-hidden group transition-all duration-500 hover:shadow-xl border border-stone-100">
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center mb-6 text-stone-600">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <h3 class="text-2xl font-bold text-stone-900 mb-2">本地优先</h3>
-                        <p class="text-stone-500">数据只存储在你的手机里，云端只做摆渡人，不做偷窥者。</p>
+                <div class="text-center">
+                    <div class="w-12 h-12 mx-auto text-gray-400 mb-5">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
-                    <div class="absolute top-1/2 right-0 transform translate-x-1/3 -translate-y-1/2 opacity-5">
-                        <svg class="w-48 h-48" fill="currentColor" viewBox="0 0 24 24"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                    </div>
+                    <h3 class="text-xl font-semibold text-black mb-3">本地优先</h3>
+                    <p class="text-gray-500 leading-relaxed">数据只存储在你的手机里，云端只做摆渡人，不做偷窥者。</p>
                 </div>
-
-                <!-- Card 3: HealthKit -->
-                <div class="bg-gradient-to-br from-rose-50 to-white rounded-[3rem] p-10 relative overflow-hidden group transition-all duration-500 hover:shadow-xl border border-rose-100">
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center mb-6 text-rose-500">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                        </div>
-                        <h3 class="text-2xl font-bold text-stone-900 mb-2">HealthKit 深度集成</h3>
-                        <p class="text-stone-500">无缝接入 iOS 健康数据，耗电量极低，守护不打扰。</p>
+                <div class="text-center">
+                    <div class="w-12 h-12 mx-auto text-gray-400 mb-5">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                     </div>
-                    <!-- Heartbeat animation decoration -->
-                    <div class="absolute bottom-0 left-0 w-full h-12 opacity-20">
-                        <svg class="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                            <path d="M0 10 L10 10 L15 0 L20 20 L25 10 L30 10 L40 10 L45 5 L50 15 L55 10 L100 10" fill="none" stroke="currentColor" stroke-width="1" class="text-rose-500"></path>
-                        </svg>
-                    </div>
+                    <h3 class="text-xl font-semibold text-black mb-3">HealthKit 深度集成</h3>
+                    <p class="text-gray-500 leading-relaxed">无缝接入 iOS 健康数据，耗电量极低，守护不打扰。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Download Section -->
-    <section id="download" class="py-32 relative">
-        <div class="absolute inset-0 bg-stone-900 clip-path-slant"></div>
-        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white">准备好开始这段旅程了吗？</h2>
-            <p class="text-stone-400 text-xl mb-12 font-light">WeDay让你们更懂彼此</p>
-            
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                <div class="qr-trigger bg-white text-stone-900 hover:bg-orange-50 px-10 py-5 rounded-full font-bold transition-all transform hover:-translate-y-1 shadow-2xl flex items-center cursor-pointer">
-                    <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-29-18-08-49.png" alt="Coze" class="w-6 h-6 mr-2">
-                    尝试 Demo
-                    <span class="ml-2 text-xs bg-stone-200 px-2 py-0.5 rounded text-stone-600">Beta</span>
-                    <div class="qr-popup">
-                        <img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-30-14-31-35.png" alt="扫码体验">
+    <!-- Download CTA Section -->
+    <section id="download" class="snap-section">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8 w-full">
+            <div class="bg-orange-50 rounded-[3rem] py-24 md:py-32 px-8 md:px-12 text-center">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-black">准备好开始这段旅程了吗？</h2>
+                <p class="text-gray-500 mt-5 text-lg md:text-xl">WeDay 让你们更懂彼此</p>
+
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mt-12">
+                    <div class="qr-trigger group bg-orange-500 text-white hover:bg-orange-600 px-10 py-4 rounded-full font-bold text-lg transition-colors inline-flex items-center gap-3 cursor-pointer shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/30">
+                        <img src="assets/coze_black.png" alt="Coze" class="w-6 h-6 invert">
+                        尝试 Demo
+                        <span class="group-hover:translate-x-1.5 transition-transform duration-200">&rarr;</span>
+                        <div class="qr-popup">
+                            <img src="assets/scan.png" alt="扫码体验">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="mt-10 text-sm text-stone-500">
-                * IOS 以及 Android 版本正在开发中，敬请关注
+                <p class="text-gray-400 text-sm mt-8">* iOS 及 Android 版本正在开发中，敬请关注</p>
             </div>
         </div>
-
     </section>
-
-    <style>
-        @keyframes infinite-scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-        .animate-infinite-scroll {
-            animation: infinite-scroll 25s linear infinite;
-        }
-        .hover\:pause:hover {
-            animation-play-state: paused;
-        }
-    </style>
 
     <!-- Footer -->
-    <footer class="bg-stone-50 border-t border-stone-200 py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-start">
-                <div class="mb-8 md:mb-0 max-w-xs">
-                    <span class="text-2xl font-bold text-stone-900 tracking-tight">WeDay</span>
-                    <p class="text-stone-500 mt-4 leading-relaxed">两个人的每一天，都温柔地同框。<br>用数据感知爱，用科技传递情。</p>
-                </div>
-                <div class="grid grid-cols-2 gap-12 sm:gap-24">
-                    <div>
-                        <h4 class="font-bold text-stone-900 mb-4">产品</h4>
-                        <ul class="space-y-3 text-sm text-stone-500">
-                            <li><a href="#" class="hover:text-orange-600 transition-colors">功能介绍</a></li>
-                            <li><a href="#" class="hover:text-orange-600 transition-colors">下载应用</a></li>
-                            <li><a href="#" class="hover:text-orange-600 transition-colors">更新日志</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-stone-900 mb-4">支持</h4>
-                        <ul class="space-y-3 text-sm text-stone-500">
-                            <li><a href="#" class="hover:text-orange-600 transition-colors">使用指南</a></li>
-                            <li><a href="#" class="hover:text-orange-600 transition-colors">隐私政策</a></li>
-                            <li><a href="#" class="hover:text-orange-600 transition-colors">联系我们</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-16 pt-8 border-t border-stone-200 text-center text-sm text-stone-400">
-                <p>&copy; 2025-2026 WeDay Team. All rights reserved. | <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="hover:text-stone-600">粤ICP备2025504440号</a></p>
+    <footer class="py-8 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-xs text-gray-400">&copy; 2025-2026 WeDay Team. All rights reserved.</p>
+            <div class="flex gap-6 text-xs text-gray-400">
+                <a href="#" class="hover:text-gray-600 transition-colors">隐私政策</a>
+                <a href="#" class="hover:text-gray-600 transition-colors">使用条款</a>
+                <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="hover:text-gray-600 transition-colors">粤ICP备2025504440号</a>
             </div>
         </div>
     </footer>
 
     <script>
-        function replaceWithComic(element) {
-            element.classList.remove('bg-yellow-50', 'border-2', 'border-dashed', 'border-yellow-200', 'group', 'cursor-pointer', 'flex', 'items-center', 'justify-center');
-            element.innerHTML = '<img src="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2026/2025-11-29-17-03-35.png" alt="Daily Comic" class="w-full h-full object-cover animate-fade-in">';
-            element.onclick = null;
-        }
+        // Navbar shadow on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            nav.classList.toggle('shadow-sm', window.scrollY > 10);
+        });
+
+        // Comic Carousel Engine
+        (function() {
+            const COMIC_IMAGES = [
+                { src: 'assets/漫画日记1.jpg',   width: 300, offsetY:  45, baseZ: 4 },
+                { src: 'assets/漫画日记2.jpg',   width: 260, offsetY: -55, baseZ: 7 },
+                { src: 'assets/漫画日记3.jpg',   width: 320, offsetY:  30, baseZ: 3 },
+                { src: 'assets/漫画日记4（单人）.jpg', width: 280, offsetY: -40, baseZ: 8 },
+                { src: 'assets/漫画日记5.jpg',   width: 340, offsetY:  60, baseZ: 2 },
+                { src: 'assets/漫画日记6.jpg',   width: 270, offsetY: -25, baseZ: 6 },
+                { src: 'assets/漫画日记7.jpg',   width: 310, offsetY:  50, baseZ: 5 },
+                { src: 'assets/漫画日记8.jpg',   width: 250, offsetY: -60, baseZ: 9 },
+                { src: 'assets/漫画日记9.jpg',   width: 330, offsetY:  20, baseZ: 1 },
+                { src: 'assets/漫画日记10.jpg',  width: 290, offsetY: -35, baseZ: 7 },
+                { src: 'assets/漫画日记11.jpg',  width: 300, offsetY:  40, baseZ: 4 },
+                { src: 'assets/漫画日记12.jpg',  width: 280, offsetY: -50, baseZ: 8 },
+            ];
+            const GAP = 28;
+            const COPIES = 3;
+
+            const track = document.getElementById('comicCarousel');
+            const outer = document.getElementById('comicCarouselOuter');
+            if (!track || !outer) return;
+
+            // Build DOM: 3 copies
+            const allData = [];
+            for (let c = 0; c < COPIES; c++) {
+                COMIC_IMAGES.forEach((img, i) => {
+                    allData.push({ ...img, index: c * COMIC_IMAGES.length + i, originalIndex: i });
+                });
+            }
+
+            const items = [];
+            allData.forEach(data => {
+                const el = document.createElement('div');
+                el.className = 'comic-item';
+                el.style.width = data.width + 'px';
+                el.innerHTML = `<img src="${data.src}" alt="漫画日记" loading="lazy" decoding="async" draggable="false">`;
+                track.appendChild(el);
+                items.push({
+                    el,
+                    offsetY: data.offsetY,
+                    baseZ: data.baseZ,
+                    width: data.width,
+                });
+            });
+
+            // Pre-compute cumulative positions
+            const positions = [];
+            let pos = 0;
+            for (let i = 0; i < items.length; i++) {
+                positions.push(pos);
+                pos += items[i].width + GAP;
+            }
+            const sectionWidth = positions[COMIC_IMAGES.length] || pos;
+
+            // State
+            let x = -sectionWidth; // Start at middle copy
+            let velocity = 0;
+            let isDragging = false;
+            let lastPointerX = 0;
+            let lastTime = 0;
+            let dragStartX = 0;
+            let dragStartTime = 0;
+
+            // Center-focus update
+            const vw = () => window.innerWidth;
+            const screenCenter = () => vw() / 2;
+
+            function updateItems() {
+                const center = screenCenter();
+                const maxDist = vw() * 0.55;
+
+                for (let i = 0; i < items.length; i++) {
+                    const item = items[i];
+                    const itemCenter = positions[i] + item.width / 2 + x + vw() / 2;
+                    const dist = Math.abs(itemCenter - center);
+                    const t = Math.min(dist / maxDist, 1);
+
+                    const scale = 1.15 - t * 0.45;
+                    const opacity = 1 - t * 0.55;
+                    const zIndex = Math.round((1 - t) * 90) + item.baseZ;
+
+                    item.el.style.transform = `translateY(${item.offsetY}px) scale(${scale})`;
+                    item.el.style.opacity = opacity;
+                    item.el.style.zIndex = Math.min(zIndex, 100);
+                }
+            }
+
+            function animate() {
+                if (!isDragging && Math.abs(velocity) > 0.3) {
+                    x += velocity;
+                    velocity *= 0.94;
+                } else if (!isDragging) {
+                    velocity = 0;
+                }
+
+                // Infinite loop boundaries
+                if (x < -sectionWidth * 1.5) x += sectionWidth;
+                if (x > -sectionWidth * 0.5) x -= sectionWidth;
+
+                track.style.transform = `translateX(${x}px)`;
+                updateItems();
+                requestAnimationFrame(animate);
+            }
+            animate();
+
+            // Pointer events (mouse + touch)
+            outer.addEventListener('pointerdown', e => {
+                e.preventDefault();
+                isDragging = true;
+                lastPointerX = e.clientX;
+                dragStartX = e.clientX;
+                lastTime = performance.now();
+                dragStartTime = lastTime;
+                velocity = 0;
+                outer.setPointerCapture(e.pointerId);
+                outer.style.cursor = 'grabbing';
+            });
+
+            outer.addEventListener('pointermove', e => {
+                if (!isDragging) return;
+                const dx = e.clientX - lastPointerX;
+                x += dx;
+                const now = performance.now();
+                const dt = now - lastTime;
+                if (dt > 0) velocity = (dx / dt) * 16;
+                lastPointerX = e.clientX;
+                lastTime = now;
+            });
+
+            outer.addEventListener('pointerup', e => {
+                if (!isDragging) return;
+                isDragging = false;
+                outer.style.cursor = 'grab';
+                // Flick detection: quick short drag = higher velocity
+                const totalDx = e.clientX - dragStartX;
+                const totalDt = performance.now() - dragStartTime;
+                if (totalDt > 0 && totalDt < 200) {
+                    velocity = (totalDx / totalDt) * 16 * 1.5;
+                }
+            });
+
+            outer.addEventListener('pointercancel', () => {
+                isDragging = false;
+                outer.style.cursor = 'grab';
+            });
+
+            // Button inertia nudge
+            const btnLeft = document.getElementById('carouselBtnLeft');
+            const btnRight = document.getElementById('carouselBtnRight');
+            btnLeft.addEventListener('pointerdown', e => e.stopPropagation());
+            btnRight.addEventListener('pointerdown', e => e.stopPropagation());
+            btnLeft.addEventListener('click', () => { velocity = 28; });
+            btnRight.addEventListener('click', () => { velocity = -28; });
+
+            // Recalculate on resize
+            window.addEventListener('resize', updateItems);
+        })();
     </script>
 </body>
 </html>
