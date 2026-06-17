@@ -1,41 +1,34 @@
-# WeDay 官网
+# WeDay 官网（wedayapp.cn）— 构建产物仓库
 
-WeDay - AI 驱动的伴侣情绪连接器。
+⚠️ **本仓库存放的是 Astro 站点的构建产物（`dist/`），不是源码。请勿手动编辑这里的 `index.html` / `assets/` 等文件 —— 下次部署会被整体覆盖。**
 
-## 关于 WeDay
+## 这是什么
 
-WeDay 将冷冰冰的生理数据翻译成温暖的情绪语言。通过 AI 情绪翻译、双人同频状态共享、AI 关心教练和每日情绪漫画回忆，让异地伴侣更懂彼此。
+- `https://wedayapp.cn` 的静态站点产物。
+- 部署方式：WeDay 自家服务器 nginx 直挂本仓库目录当 document root（**不是 GitHub Pages**，仓库名仅历史遗留）。
+- 服务器路径 `/root/WeDayApp.github.io`，nginx 容器内挂载到 `/var/www/wedayapp`（只读）。
 
-## 页面结构
+## 源码在哪
 
-| 区块 | 说明 |
-|------|------|
-| Hero | 品牌主视觉 + Demo 入口 |
-| AI 情绪翻译官 | 根据睡眠/HRV/压力数据识别情绪波动 |
-| 双人同频 | 实时共享双方生理状态 |
-| AI 关心教练 | 智能表达建议与行动推荐 |
-| 情绪漫画回忆 | 每日 AI 生成双人漫画日记，支持无限惯性滚动画廊 |
-| 隐私承诺 | 端到端加密 / 本地优先 / HealthKit 集成 |
-| Download CTA | Demo 体验入口（Coze）+ App 上线预告 |
+源码是一个 Astro 项目，在 `weday-website/`（与本仓库同级的工作目录）。改动网站请改源码，然后重新构建产物覆盖本仓库。
 
-## 技术栈
+## 部署流程
 
-- 纯静态 HTML + 原生 JavaScript
-- Tailwind CSS (CDN)
-- Google Fonts: Inter + Caveat
-- 部署: GitHub Pages
+1. 本地构建源码：
+   ```bash
+   cd weday-website && ./node_modules/.bin/astro build
+   ```
+2. 用 `dist/` 产物替换本仓库内容（保留 `.git`），commit + push。
+3. 服务器拉取并重启 nginx：
+   ```bash
+   cd /root/WeDayApp.github.io
+   git pull origin main
+   docker compose -f /root/UserSystemService/docker-compose.yml restart nginx
+   ```
+   注：服务器 git remote 必须是 SSH（HTTPS 会被墙）。
 
-## 本地预览
+## 包含页面
 
-```bash
-python -m http.server 8080
-# 访问 http://localhost:8080
-```
-
-## 素材说明
-
-所有图片素材存放于 `assets/` 目录，均为本地引用，无外部 CDN 图片依赖。
-
-## 版权
-
-© 2025-2026 WeDay Team
+- `/` 首页（看见 → 理解 → 靠近 → 记录 → 内测引导）
+- `/privacy` 隐私政策
+- `/terms` 用户服务协议
